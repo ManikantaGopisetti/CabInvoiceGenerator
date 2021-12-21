@@ -7,7 +7,7 @@ public class InvoiceGeneratorService {
 	private static final double MINIMUM_FARE = 5;
 
 	public double CalculateFare(double distance, int time) throws InvalidUserInputException {
-		if(distance<=0) {
+		if (distance <= 0) {
 			throw new InvalidUserInputException("Distance can't be less than or equal to zero");
 		}
 		double totalFare = distance * COST_PER_KM + time * COST_PER_MINUTE;
@@ -18,12 +18,12 @@ public class InvoiceGeneratorService {
 
 	}
 
-	public double CalculateFare(Ride[] rides) throws InvalidUserInputException {
-		double aggregateFare=0;
+	public InvoiceSummary CalculateFare(Ride[] rides) throws InvalidUserInputException {
+		double aggregateFare = 0;
 		for (Ride ride : rides) {
-			aggregateFare+=CalculateFare(ride.getDistance(),ride.getTime());
+			aggregateFare += CalculateFare(ride.getDistance(), ride.getTime());
 		}
-		return aggregateFare;
+		return new InvoiceSummary(rides.length, aggregateFare, aggregateFare / rides.length);
 	}
 
 }
