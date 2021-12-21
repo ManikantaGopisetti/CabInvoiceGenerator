@@ -6,8 +6,10 @@ public class InvoiceGeneratorService {
 	private static final double COST_PER_KM = 10;
 	private static final double MINIMUM_FARE = 5;
 
-	public double CalculateFare(double distance, int time) {
-
+	public double CalculateFare(double distance, int time) throws InvalidUserInputException {
+		if(distance<=0) {
+			throw new InvalidUserInputException("Distance can't be less than or equal to zero");
+		}
 		double totalFare = distance * COST_PER_KM + time * COST_PER_MINUTE;
 		if (totalFare > MINIMUM_FARE) {
 			return totalFare;
