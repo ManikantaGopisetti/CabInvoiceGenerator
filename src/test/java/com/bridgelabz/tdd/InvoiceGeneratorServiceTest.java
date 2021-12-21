@@ -1,7 +1,6 @@
 package com.bridgelabz.tdd;
 
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,5 +42,15 @@ public class InvoiceGeneratorServiceTest {
 		invoiceGeneratorService.CalculateFare(distance, time);
 		
 	}
+	
+	@Test
+	public void givenMultipleRides_ReturnAggregateFare() throws InvalidUserInputException{
+		
+		Ride[] rides = {new Ride(3.2,3),new Ride(4.5,3),new Ride(2.5,1)};
+		double fare = invoiceGeneratorService.CalculateFare(rides);
+		assertEquals(109, fare, 0.0);
+		
+	}
+	
 
 }
