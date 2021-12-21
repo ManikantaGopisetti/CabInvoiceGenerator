@@ -18,4 +18,12 @@ public class InvoiceGeneratorService {
 
 	}
 
+	public double CalculateFare(Ride[] rides) throws InvalidUserInputException {
+		double aggregateFare=0;
+		for (Ride ride : rides) {
+			aggregateFare+=CalculateFare(ride.getDistance(),ride.getTime());
+		}
+		return aggregateFare;
+	}
+
 }
