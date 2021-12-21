@@ -69,5 +69,25 @@ public class InvoiceGeneratorServiceTest {
 		assertEquals(expectedInvoiceSummary, invoiceSummary);
 
 	}
+	
+	@Test
+	public void givenRidetypePremium_ReturnInvoiceSummary() throws InvalidUserInputException {
+
+		Ride[] rides = { new Ride(3.2, 3), new Ride(4.5, 3), new Ride(2.5, 1) };
+		InvoiceSummary invoiceSummary = invoiceGeneratorService.CalculateFare(rides,InvoiceGeneratorService.Ridetype.PREMIUM);
+		InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(3, 167, 55.666666666666664);
+		assertEquals(expectedInvoiceSummary, invoiceSummary);
+
+	}
+	
+	@Test
+	public void givenRidetypeNormal_ReturnInvoiceSummary() throws InvalidUserInputException {
+
+		Ride[] rides = { new Ride(3.2, 3), new Ride(4.5, 3), new Ride(2.5, 1) };
+		InvoiceSummary invoiceSummary = invoiceGeneratorService.CalculateFare(rides,InvoiceGeneratorService.Ridetype.NORMAL);
+		InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(3, 109, 36.333333333333336);
+		assertEquals(expectedInvoiceSummary, invoiceSummary);
+
+	}
 
 }
