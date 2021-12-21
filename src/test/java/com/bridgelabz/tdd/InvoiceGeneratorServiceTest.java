@@ -16,5 +16,16 @@ public class InvoiceGeneratorServiceTest {
 		assertEquals(55, fare, 0.0);
 		
 	}
+	
+	@Test
+	public void givenLessDistanceAndTime_ReturnMinimumFare() {
+		
+		InvoiceGeneratorService invoiceGeneratorService = new InvoiceGeneratorService();
+		double distance = 0;
+		int time = 3;
+		double fare = invoiceGeneratorService.CalculateFare(distance, time);
+		assertEquals(5, fare, 0.0);
+		
+	}
 
 }
