@@ -1,6 +1,7 @@
 package com.bridgelabz.tdd;
 
 import static org.junit.Assert.assertEquals;
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,6 +49,23 @@ public class InvoiceGeneratorServiceTest {
 		Ride[] rides = { new Ride(3.2, 3), new Ride(4.5, 3), new Ride(2.5, 1) };
 		InvoiceSummary invoiceSummary = invoiceGeneratorService.CalculateFare(rides);
 		InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(3, 109, 36.333333333333336);
+		assertEquals(expectedInvoiceSummary, invoiceSummary);
+
+	}
+
+	@Test
+	public void givenUserId_ReturnInvoiceSummary() throws InvalidUserInputException {
+
+		RideRepository rideRepository = new RideRepository();
+		Map<Integer, Ride[]> rideRepo = rideRepository.getRideRepo();
+		Ride[] mani = { new Ride(3.2, 3), new Ride(4.5, 3), new Ride(2.5, 1) };
+		Ride[] uma = { new Ride(3.2, 3), new Ride(4.5, 3) };
+
+		rideRepo.put(1, mani);
+		rideRepo.put(2, uma);
+
+		InvoiceSummary invoiceSummary = invoiceGeneratorService.CalculateFare(2, rideRepo);
+		InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 83, 41.5);
 		assertEquals(expectedInvoiceSummary, invoiceSummary);
 
 	}
