@@ -1,5 +1,9 @@
 package com.bridgelabz.tdd;
 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
 public class InvoiceGeneratorService {
 
 	private static final int COST_PER_MINUTE = 1;
@@ -24,6 +28,18 @@ public class InvoiceGeneratorService {
 			aggregateFare += CalculateFare(ride.getDistance(), ride.getTime());
 		}
 		return new InvoiceSummary(rides.length, aggregateFare, aggregateFare / rides.length);
+	}
+
+	public InvoiceSummary CalculateFare(int userId, Map<Integer, Ride[]> rideRepo) throws InvalidUserInputException {
+
+		Iterator<Entry<Integer, Ride[]>> iterator = rideRepo.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<Integer, Ride[]> entry = iterator.next();
+			if (entry.getKey().equals(userId)) {
+				return CalculateFare(entry.getValue());
+			}
+		}
+		return null;
 	}
 
 }
