@@ -2,14 +2,22 @@ package com.bridgelabz.tdd;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class InvoiceGeneratorServiceTest {
+	
+	InvoiceGeneratorService invoiceGeneratorService;
+	
+	@Before
+	public void init() {
+		invoiceGeneratorService =new InvoiceGeneratorService();
+	}
+	
 
 	@Test
 	public void givenDistanceAndTime_ReturnTotalFare() {
-		
-		InvoiceGeneratorService invoiceGeneratorService = new InvoiceGeneratorService();
+		 
 		double distance = 4.5;
 		int time = 10;
 		double fare = invoiceGeneratorService.CalculateFare(distance, time);
@@ -20,7 +28,6 @@ public class InvoiceGeneratorServiceTest {
 	@Test
 	public void givenLessDistanceAndTime_ReturnMinimumFare() {
 		
-		InvoiceGeneratorService invoiceGeneratorService = new InvoiceGeneratorService();
 		double distance = 0;
 		int time = 3;
 		double fare = invoiceGeneratorService.CalculateFare(distance, time);
